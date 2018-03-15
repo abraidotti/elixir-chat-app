@@ -25,14 +25,14 @@ defmodule ChatWeb.RoomChannel do
   end
 
   # example see: https://git.io/vNsYD
-  # def handle_info(:after_join, socket) do
-  #   Chat.Message.get_messages()
-  #   |> Enum.each(fn msg -> push(socket, "shout", %{
-  #       name: msg.name,
-  #       message: msg.message,
-  #     }) end)
-  #   {:noreply, socket} # :noreply
-  # end
+  def handle_info(:after_join, socket) do
+    Chat.Message.get_messages()
+    |> Enum.each(fn msg -> push(socket, "shout", %{
+        name: msg.name,
+        message: msg.message,
+      }) end)
+    {:noreply, socket} # :noreply
+  end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
